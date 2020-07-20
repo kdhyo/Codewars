@@ -1,24 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { getProblemList } from "./api/problems";
+import CodeMirror from "react-codemirror";
+
+import "codemirror/mode/javascript/javascript";
+import "codemirror/lib/codemirror.css";
+
+function ProblemDetail({ problem }) {
+  return (
+    <div className="problem">
+      <section className="description">
+        <h3>{problem.title}</h3>
+        <p>{problem.description}</p>
+      </section>
+      <section className="code-editor">
+        <CodeMirror
+          value={`function solution () {}`}
+          options={{
+            mode: "javascript",
+          }}
+        />
+        <button>제출</button>
+      </section>
+    </div>
+  );
+}
 
 function App() {
+  const [problems, setProblems] = useState([]);
+  const [selectedProblemId, setselectedProblemId] = useState(null);
+
+  const [selectedProblem] = problems.filter(
+    (data) => data.id === selectedProblemId
+  );
+
+  useEffect(function () {
+    async function getProblems() {
+      const data = await getProblemList();
+      setProblems(data);
+    }
+    getProblems();
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav>Codewars</nav>
+      {selectedProblemId === null && (
+        <ul>
+          {problems.map(function (problem) {
+            return (
+              <li key={problem.id}>
+                <h3>{problem.title}</h3>
+                <button onClick={() => setselectedProblemId(problem.id)}>
+                  문제풀기
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      {selectedProblemId !== null && (
+        <ProblemDetail problem={selectedProblem} />
+      )}
     </div>
   );
 }

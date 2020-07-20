@@ -1,38 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;800&family=Rowdies:wght@300&display=swap");
+
 .App {
+  background-color: #ffccbc;
+  height: 100vh;
+}
+nav {
+  background-color: #ffab91;
+  text-align: center;
+  padding: 1em 0;
+  font-size: 2em;
+  font-family: "Rowdies", cursive;
+}
+
+ul {
+  margin-top: 2em;
+  width: 100%;
+}
+ul li {
+  text-align: center;
+  font-family: "Nanum Myeongjo", serif;
+  margin: 5px 0;
+}
+
+ul > li h3 {
+  display: inline-block;
+}
+
+ul > li button {
+  margin-left: 10px;
+  border: none;
+  border-radius: 2px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+ul > li button:hover {
+  background-color: #dddddd;
+}
+
+.problem {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.description,
+.code-editor {
+  width: 50%;
+  height: 100vh;
+}
+
+.description {
+  background-color: #fd8d6b;
+  padding: 1em;
+}
+
+.description h3 {
+  font-size: 2em;
+  font-weight: 500;
+  margin-bottom: 2em;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.code-editor {
+  background-color: #ffccbc;
 }
