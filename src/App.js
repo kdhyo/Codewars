@@ -40,7 +40,7 @@ function App() {
       setProblems(data);
     }
     getProblems();
-  });
+  }, []);
 
   return (
     <div className="App">
