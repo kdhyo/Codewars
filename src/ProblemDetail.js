@@ -30,7 +30,7 @@ export default function ProblemDetail({ problem }) {
           ></div>
           <div className="modal">
             {codeResult}
-            <button onClick={() => modal.confirm(config)}>Close</button>
+            <button onClick={() => setisModalShowing(false)}>Close</button>
           </div>
         </div>
       )}
