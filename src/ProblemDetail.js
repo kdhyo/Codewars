@@ -7,18 +7,33 @@ import { postUserSolution } from "./api/problems";
 
 export default function ProblemDetail({ problem }) {
   const [code, setcode] = useState("");
+  const [isModalShowing, setisModalShowing] = useState(false);
+  const [codeResult, setcodeResult] = useState("");
 
   function validateAnswer() {
     postUserSolution(problem._id, code).then((data) => {
+      setisModalShowing(true);
       if (data.result !== "에러") {
-        alert(data.result);
+        setcodeResult(data.result);
       } else {
-        alert(data.detail);
+        setcodeResult(data.detail);
       }
     });
   }
   return (
     <div className="problem">
+      {isModalShowing && (
+        <div>
+          <div
+            className="modal-overlay"
+            onClick={() => setisModalShowing(false)}
+          ></div>
+          <div className="modal">
+            {codeResult}
+            <button onClick={() => setisModalShowing(false)}>Close</button>
+          </div>
+        </div>
+      )}
       <section className="description">
         <h3>{problem.title}</h3>
         <p>{problem.description}</p>
