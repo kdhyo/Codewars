@@ -1,9 +1,14 @@
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "http://codewars-env.eba-prntr9nm.us-east-1.elasticbeanstalk.com"
+    : "http://localhost:8080";
+
 export const getProblemList = () => {
-  return fetch("http://localhost:8000/problems").then((res) => res.json());
+  return fetch(`${API_URL}/problems`).then((res) => res.json());
 };
 
 export const postUserSolution = (problemId, code) => {
-  return fetch(`http://localhost:8000/problems/${problemId}`, {
+  return fetch(`${API_URL}/problems/${problemId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
